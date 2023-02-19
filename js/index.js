@@ -308,7 +308,7 @@ function resumeTimer(who) {
             remaining = --myTimeTicks;
             elementWho = "my";
         }
-        /*if (remaining % 20 == 0)*/ $("#" + elementWho + "-timer").text(ticksToReadableTime(remaining));
+        if (remaining % 20 == 0) $("#" + elementWho + "-timer").text(ticksToReadableTime(remaining));
 
         if (remaining <= 0) clearInterval(timerId);
     }, 50); // 20ticks/s => should be called every 1000/20=50ms
