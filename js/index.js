@@ -350,8 +350,7 @@ function disposeTimer() {
 
 function updatePGN() {
     var pgn = (engine !== null ? engine.pgn() : null);
-    //console.log(pgn.length);
-    $("#pgn").html("<b>PGN:</b> " + (pgn === null || pgn.length === 0 ? "<not presented>" : pgn));
+    $("#pgn").html("<b>PGN:</b> " + (pgn === null || pgn.length === 0 ? "not presented" : pgn));
 }
 
 function scheduleAlert(message) {
