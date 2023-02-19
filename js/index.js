@@ -78,16 +78,26 @@ function lockAndOpenConnection(mode, code) {
             } else if (message === "disconnect:ooooh_i_am_giving_it_up") {
                 softClose("Disconnected. The server attempted to generate an invitation code for you 5 times but each time it was not unique. Consider something strange happened today");
             } else if (message === "disconnect:opponent_disconnected") {
-                softClose("Disconnected. Your opponent has disconnected (might be due to an error)")
+                softClose("Disconnected. Your opponent has disconnected (might be due to an error)");
             } else if (message === "disconnect:overloaded") {
                 softClose("Disconnected. The game server is currently " +
                         "overloaded and is unable to handle your connection");
             } else if (message === "disconnect:host_timeout") {
                 softClose("Disconnected. We can't allow more than 15 minutes for waiting for your opponent");
             } else if (message === "disconnect:you_won") {
-                softClose("Congratulations, you have checkmated your opponent and won the game!")
+                softClose("Congratulations, you have checkmated your opponent!");
             } else if (message === "disconnect:you_lost") {
-                softClose("Your opponent has checkmated you. Better luck next time, we hope you have enjoyed the game <3")
+                softClose("Your opponent has checkmated you. Better luck next time, we hope you have enjoyed the game <3");
+            } else if (message === "disconnect:timed_out_draw") {
+                softClose("You both have run out of time, this is a pretty rare case!");
+            } else if (message === "disconnect:timed_out_white") {
+                softClose("Whites have run out of time. Blacks have won the game! We hope you have enjoyed the game <3");
+            } else if (message === "disconnect:timed_out_black") {
+                softClose("Blacks have run out of time. Whites have won the game! We hope you have enjoyed the game <3");
+            } else if (message === "disconnect:you_resigned") {
+                softClose("You have resigned. Better luck next time, we hope you have enjoyed the game <3");
+            } else if (message === "disconnect:opponent_resigned") {
+                softClose("Your opponent has resigned!");
             } else {
                 softClose("Disconnected. The exact reason is unknown");
             }
@@ -107,6 +117,7 @@ function lockAndOpenConnection(mode, code) {
 
             $("#waiting-text").hide();
             $("#pgn").show(); updatePGN(); // it's safe to call the method before engine init
+            $("#game-action-button").text("Resign"); $("#game-action-button").show();
             state = "playing";
 
             initializeGame();
@@ -167,7 +178,7 @@ function lockAndOpenConnection(mode, code) {
         }
         if (board !== null) {
             updatePGN();
-            $("#quit-button").show();
+            $("#game-action-button").text("Quit");
         } else {
             restoreMenu();
         }
@@ -371,8 +382,9 @@ function protocolError() {
 function restoreMenu() {
     $("#waiting-text").hide();
     $("#pgn").hide();
-    $("#quit-button").hide();
-   
+    $("#game-action-button").hide();
+    $("#game-action-button").text("");
+
     hasConnectedThisSession = false;
     dontShowDefaultDisconnectMessage = false;
     socket = null;
@@ -428,8 +440,14 @@ $("#host-room").click(function() {
     $("#host-room").text("Waiting for a response...");
 });
 
-$("#quit-button").click(function() {
-    restoreMenu();
+$("#game-action-button").click(function() {
+    if ($("#game-action-button").text() === "Resign") {
+        if (socket !== null) {
+            socket.send("resign");
+        }
+    } else {
+        restoreMenu();
+    }
 });
 
 processQuickStats();
