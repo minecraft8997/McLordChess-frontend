@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>McLord Chess</title>
+    <script src="js/HackTimer.min.js"></script>
+</head>
+<body>
+    <header>
+        <h2>McLord Chess</h2><img style="margin-left: 0.5%; width: 4%; height: 4%" src="img/chesspieces/wikipedia/bR.png"></img>
+    </header>
+    <hr>
+
+    <noscript>
+        <center>
+            <h3 style="margin-top: 10%">
+                JavaScript support is required in order to run this game.
+            </h3>
+        </center>
+    </noscript>
+
+    <div class="menu">
+        <center>
+            <input class="menu-input" id="invitation-code" type="text" placeholder="Your invitation code...">
+            <button class="menu-button" id="join-room">Join the game room!</button>
+            <h4>Or...</h4>
+            <button class="menu-button" id="host-room">Host your own room!</button>
+            <br>
+            <h4 id="quick-stats"></h4>
+            <h3><a href="about/">About</a></h3>
+        </center>
+    </div>
+
+    <center>
+        <h3 class="hidden-by-default" id="waiting-text"></h3>
+        <div class="hidden-by-default" id="countdown-timer">
+            <h2 id="opponent-timer"></h2>
+            <h2 id="my-timer"></h2>
+        </div>
+        <div class="hidden-by-default" id="board"></div>
+        <br>
+        <div class="hidden-by-default" id="pgn"></div>
+        <br>
+        <button class="hidden-by-default menu-button" id="quit-button">Quit</button>
+    </center>
+
+    <h3 class="copyright-notice">© deewend, 2023</h3>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" 
+        href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+        integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" 
+        integrity="sha384-Ft/vb48LwsAEtgltj7o+6vtS2esTU9PCpDqcXs4OCVQFZu5BqprHtUCZ4kjK+bpE" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.min.js" 
+        integrity="sha384-E8jJkIbgL14NP9/2S/pwuPBtvO5bb4Xnl6azfoTYWt9jqCgRjyRI8WD5BCKJCyMJ" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
